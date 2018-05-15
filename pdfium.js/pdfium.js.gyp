@@ -15,6 +15,7 @@
       'target_name': 'pdfium_js',
       'sources': [
         'pdfium.js.cc',
+        'pdfium.la.js.cc'
       ],
     },
   ],

@@ -6,6 +6,7 @@
 /xcodebuild
 Makefile
 .DS_Store
+.vscode
 *.filters
 *.mk
 *.opensdf

@@ -4,121 +4,73 @@
 
 // Copyright (c) 2014 Lu Wang <coolwanglu@gmail.com>
 
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "./pdfium.js.h"
 
-#include <utility>
-
-#include "../fpdfsdk/include/fpdf_dataavail.h"
-#include "../fpdfsdk/include/fpdf_ext.h"
-#include "../fpdfsdk/include/fpdfformfill.h"
-#include "../fpdfsdk/include/fpdftext.h"
-#include "../fpdfsdk/include/fpdfview.h"
-
-struct {
-    UNSUPPORT_INFO unsuppored_info;
-} global;
+__GLOBAL__ global;
 
 extern "C"
 int PDFiumJS_read_file(void *file_id, unsigned long pos, unsigned char *pBuf, unsigned long size);
 
-struct PDFiumJS_Doc {
-    PDFiumJS_Doc(void *file_id, size_t len) {
-        memset(&platform_callbacks, '\0', sizeof(platform_callbacks));
-        platform_callbacks.version = 1;
-        platform_callbacks.app_alert = Form_Alert;
+PDFiumJS_Doc::PDFiumJS_Doc(void *file_id, size_t len) {
+    memset(&platform_callbacks, '\0', sizeof(platform_callbacks));
+    platform_callbacks.version = 1;
+    platform_callbacks.app_alert = Form_Alert;
 
-        memset(&form_callbacks, '\0', sizeof(form_callbacks));
-        form_callbacks.version = 1;
-        form_callbacks.m_pJsPlatform = &platform_callbacks;
+    memset(&form_callbacks, '\0', sizeof(form_callbacks));
+    form_callbacks.version = 1;
+    form_callbacks.m_pJsPlatform = &platform_callbacks;
 
-        memset(&file_access, '\0', sizeof(file_access));
-        file_access.m_FileLen = static_cast<unsigned long>(len);
-        file_access.m_GetBlock = PDFiumJS_read_file;
-        file_access.m_Param = file_id;
+    memset(&file_access, '\0', sizeof(file_access));
+    file_access.m_FileLen = static_cast<unsigned long>(len);
+    file_access.m_GetBlock = PDFiumJS_read_file;
+    file_access.m_Param = file_id;
 
-        memset(&file_avail, '\0', sizeof(file_avail));
-        file_avail.version = 1;
-        file_avail.IsDataAvail = Is_Data_Avail;
+    memset(&file_avail, '\0', sizeof(file_avail));
+    file_avail.version = 1;
+    file_avail.IsDataAvail = Is_Data_Avail;
 
-        memset(&hints, '\0', sizeof(hints));
-        hints.version = 1;
-        hints.AddSegment = Add_Segment;
+    memset(&hints, '\0', sizeof(hints));
+    hints.version = 1;
+    hints.AddSegment = Add_Segment;
 
-        pdf_avail = FPDFAvail_Create(&file_avail, &file_access);
+    pdf_avail = FPDFAvail_Create(&file_avail, &file_access);
 
-        (void) FPDFAvail_IsDocAvail(pdf_avail, &hints);
+    (void) FPDFAvail_IsDocAvail(pdf_avail, &hints);
 
-        if (!FPDFAvail_IsLinearized(pdf_avail)) {
-            doc = FPDF_LoadCustomDocument(&file_access, NULL);
-        } else {
-            doc = FPDFAvail_GetDocument(pdf_avail, NULL);
-        }
-
-        (void) FPDF_GetDocPermissions(doc);
-        (void) FPDFAvail_IsFormAvail(pdf_avail, &hints);
-
-        form = FPDFDOC_InitFormFillEnviroument(doc, &form_callbacks);
-        FPDF_SetFormFieldHighlightColor(form, 0, 0xFFE4DD);
-        FPDF_SetFormFieldHighlightAlpha(form, 100);
-
-        /*
-        int first_page = FPDFAvail_GetFirstPageNum(doc);
-        (void) FPDFAvail_IsPageAvail(pdf_avail, first_page, &hints);
-        */
-
-        page_count = FPDF_GetPageCount(doc);
-        printf("%d\n", page_count);
-        for (int i = 0; i < page_count; ++i) {
-            (void) FPDFAvail_IsPageAvail(pdf_avail, i, &hints);
-        }
-
-        FORM_DoDocumentJSAction(form);
-        FORM_DoDocumentOpenAction(form);
+    if (!FPDFAvail_IsLinearized(pdf_avail)) {
+        doc = FPDF_LoadCustomDocument(&file_access, NULL);
+    } else {
+        doc = FPDFAvail_GetDocument(pdf_avail, NULL);
     }
 
-    ~PDFiumJS_Doc() {
-        FORM_DoDocumentAAction(form, FPDFDOC_AACTION_WC);
-        FPDFDOC_ExitFormFillEnviroument(form);
-        FPDF_CloseDocument(doc);
-        FPDFAvail_Destroy(pdf_avail);
+    (void) FPDF_GetDocPermissions(doc);
+    (void) FPDFAvail_IsFormAvail(pdf_avail, &hints);
+
+    form = FPDFDOC_InitFormFillEnviroument(doc, &form_callbacks);
+    FPDF_SetFormFieldHighlightColor(form, 0, 0xFFE4DD);
+    FPDF_SetFormFieldHighlightAlpha(form, 100);
+
+    /*
+    int first_page = FPDFAvail_GetFirstPageNum(doc);
+    (void) FPDFAvail_IsPageAvail(pdf_avail, first_page, &hints);
+    */
+
+    page_count = FPDF_GetPageCount(doc);
+    printf("%d\n", page_count);
+    for (int i = 0; i < page_count; ++i) {
+        (void) FPDFAvail_IsPageAvail(pdf_avail, i, &hints);
     }
 
-    static
-    int Form_Alert(IPDF_JSPLATFORM*, FPDF_WIDESTRING, FPDF_WIDESTRING, int, int) {
-      printf("Form_Alert called.\n");
-      return 0;
-    }
+    FORM_DoDocumentJSAction(form);
+    FORM_DoDocumentOpenAction(form);
+}
 
-    static
-    bool Is_Data_Avail(FX_FILEAVAIL *pThis, size_t offset, size_t size) {
-      return true;
-    }
-
-    static
-    void Add_Segment(FX_DOWNLOADHINTS *pThis, size_t offset, size_t size) {
-    }
-
-    IPDF_JSPLATFORM platform_callbacks;
-    FPDF_FORMFILLINFO form_callbacks;
-    FPDF_FILEACCESS file_access;
-    FX_FILEAVAIL file_avail;
-    FX_DOWNLOADHINTS hints;
-    FPDF_AVAIL pdf_avail;
-    FPDF_DOCUMENT doc;
-    FPDF_FORMHANDLE form;
-    int page_count;
-};
-
-struct PDFiumJS_Page {
-    PDFiumJS_Page(FPDF_PAGE page, PDFiumJS_Doc *doc) 
-        : page(page), doc(doc) 
-    { }
-    FPDF_PAGE page;
-    PDFiumJS_Doc *doc;
-};
+PDFiumJS_Doc::~PDFiumJS_Doc() {
+    FORM_DoDocumentAAction(form, FPDFDOC_AACTION_WC);
+    FPDFDOC_ExitFormFillEnviroument(form);
+    FPDF_CloseDocument(doc);
+    FPDFAvail_Destroy(pdf_avail);
+}
 
 static
 void Unsupported_Handler(UNSUPPORT_INFO*, int type) {

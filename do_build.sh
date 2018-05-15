@@ -20,6 +20,8 @@ EXPORTED_FUNCTIONS=(
     '_PDFiumJS_Bitmap_get_stride'
     '_PDFiumJS_Bitmap_destroy'
     '_PDFiumJS_Page_destroy'
+    '_PDFiumJS_GetLayoutAnalsisResults'
+    '_PDFiumJS_LayoutAnalsisResults_destroy'
 )
 EXPORTED_FUNCTIONS=$(python -c "import sys; print('\\'' + '\\', \\''.join(sys.argv[1:])) + '\\''" ${EXPORTED_FUNCTIONS[@]})
 
@@ -47,14 +49,17 @@ do_make() {
 do_link() {
     em++ \
         -Oz \
-        --llvm-lto 1 \
-        --memory-init-file 1 \
+        --llvm-lto 3 \
+        --memory-init-file 0 \
+        -s ELIMINATE_DUPLICATE_FUNCTIONS=1 \
+        -s AGGRESSIVE_VARIABLE_ELIMINATION=1 \
         -s EXPORTED_FUNCTIONS="[$EXPORTED_FUNCTIONS]" \
         --js-library pdfium.js/pdfium.js.lib.js \
         -o web/pdfium.js \
-        -Wl,--start-group out/Release/obj.target/pdfium_js/pdfium.js/pdfium.js.o out/Release/obj.target/libpdfium.a out/Release/obj.target/libfdrm.a out/Release/obj.target/libfpdfdoc.a out/Release/obj.target/libfpdfapi.a out/Release/obj.target/libfpdftext.a out/Release/obj.target/libformfiller.a out/Release/obj.target/libfxcodec.a out/Release/obj.target/libfxcrt.a out/Release/obj.target/libfxedit.a out/Release/obj.target/libfxge.a out/Release/obj.target/libpdfwindow.a -Wl,--end-group
+        -Wl,--start-group out/Release/obj.target/pdfium_js/pdfium.js/pdfium.js.o out/Release/obj.target/pdfium_js/pdfium.js/pdfium.la.js.o out/Release/obj.target/libpdfium.a out/Release/obj.target/libfdrm.a out/Release/obj.target/libfpdfdoc.a out/Release/obj.target/libfpdfapi.a out/Release/obj.target/libfpdftext.a out/Release/obj.target/libformfiller.a out/Release/obj.target/libfxcodec.a out/Release/obj.target/libfxcrt.a out/Release/obj.target/libfxedit.a out/Release/obj.target/libfxge.a out/Release/obj.target/libpdfwindow.a -Wl,--end-group
 
-    cp web/pdfium.js.mem web/viewer/
+
+    test -f web/pdfium.js.mem && cp web/pdfium.js.mem web/viewer/
 }
 
 test $__DO_CONFIG -eq 1 && do_config

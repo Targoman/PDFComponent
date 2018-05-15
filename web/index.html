@@ -49,7 +49,7 @@
             console.group.apply(console, arguments); 
             console.groupEnd();
         },
-        _main: function () {
+        onRuntimeInitialized: function () {
           var canvas_list = [];
           var devicePixelRatio = window.devicePixelRatio;
           var timer = null;
@@ -65,7 +65,7 @@ if (typeof PDFiumJS === 'undefined') {
   (typeof window !== 'undefined' ? window : this).PDFiumJS = {};
 }
 
-var crawp = Module['crap'];
+var cwrap = function(name) { return Module['_' + name]; };
 PDFiumJS.C = {
   init: cwrap('PDFiumJS_init', null, []),
   Doc_new: cwrap('PDFiumJS_Doc_new', 'number', ['number', 'number']),
@@ -120,6 +120,8 @@ PDFiumJS.C = {
 
                   var canvas = canvas_list[cur_page];
                   var page = PDFiumJS.C.Doc_get_page(cur_doc, cur_page);
+                  Module._PDFiumJS_GetLayoutAnalsisResults(cur_doc);
+                  Module._PDFiumJS_LayoutAnalsisResults_destroy();
                   var width = PDFiumJS.C.Page_get_width(page);
                   var height = PDFiumJS.C.Page_get_height(page);
                   canvas.style.width = width + 'px';
