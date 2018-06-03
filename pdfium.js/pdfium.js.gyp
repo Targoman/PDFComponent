@@ -15,8 +15,11 @@
       'target_name': 'pdfium_js',
       'sources': [
         'pdfium.js.cc',
-        'pdfium.la.js.cc'
+        'layout_analysis.cc',
+        'pdfium.la.js.cc',
+        '../core/src/reflow/layoutprovider_taggedpdf.cpp'
       ],
+      'cflags': ['-std=c++11']
     },
   ],
 }

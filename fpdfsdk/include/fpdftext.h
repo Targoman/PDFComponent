@@ -73,6 +73,8 @@ DLLEXPORT unsigned int STDCALL FPDFText_GetUnicode(FPDF_TEXTPAGE text_page, int 
 //
 DLLEXPORT double STDCALL FPDFText_GetFontSize(FPDF_TEXTPAGE text_page, int index);
 
+DLLEXPORT bool STDCALL FPDFText_GetInfo(FPDF_TEXTPAGE text_page, int index, void** font, double* font_size, double* rotation);
+
 // Function: FPDFText_GetCharBox
 //			Get bounding box of a particular character.
 // Parameters: 

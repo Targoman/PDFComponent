@@ -39,16 +39,16 @@
       })();
       var total_memory = ('total_memory' in hashParams) ? parseInt(hashParams['total_memory']) : 1024*1024*100;
       var Module = {
-        TOTAL_MEMORY: total_memory,
+        // TOTAL_MEMORY: total_memory,
         noExitRuntime: true,
-        print: function() { 
-            console.group.apply(console, arguments); 
-            console.groupEnd();
-        },
-        printErr: function() { 
-            console.group.apply(console, arguments); 
-            console.groupEnd();
-        },
+        // print: function() { 
+        //     console.group.apply(console, arguments); 
+        //     console.groupEnd();
+        // },
+        // printErr: function() { 
+        //     console.group.apply(console, arguments); 
+        //     console.groupEnd();
+        // },
         onRuntimeInitialized: function () {
           var canvas_list = [];
           var devicePixelRatio = window.devicePixelRatio;
@@ -107,25 +107,33 @@ PDFiumJS.C = {
               var renderE = document.getElementById('render');
               renderE.innerHTML='';
               for(var i = 0; i < page_count; ++i) {
+                var p = document.createElement('div');
+                p.style.position = 'relative';
+                p.style.margin = 'auto';
                 var e = document.createElement('canvas');
                 canvas_list.push(e);
-                renderE.appendChild(e);
+                p.appendChild(e);
+                renderE.appendChild(p);
               }
 
               var cur_page = 0;
               function render_next_page() {
-                if(cur_page == page_count) return;
+                // if(cur_page == page_count) return;
+                if(cur_page === page_count || cur_page !== 0) return;
+                if(cur_page === page_count) return;
                 try {
                   var start_time = Date.now();
 
                   var canvas = canvas_list[cur_page];
+                  var container = canvas.parentElement;
                   var page = PDFiumJS.C.Doc_get_page(cur_doc, cur_page);
-                  Module._PDFiumJS_GetLayoutAnalsisResults(cur_doc);
-                  Module._PDFiumJS_LayoutAnalsisResults_destroy();
                   var width = PDFiumJS.C.Page_get_width(page);
                   var height = PDFiumJS.C.Page_get_height(page);
                   canvas.style.width = width + 'px';
                   canvas.style.height = height + 'px';
+                  container.style.width = width + 'px';
+
+                  top_offset = height;
 
                   width *= devicePixelRatio;
                   height *= devicePixelRatio;
@@ -134,6 +142,43 @@ PDFiumJS.C = {
                   canvas.height = height;
                     
                   var bitmap = PDFiumJS.C.Page_get_bitmap(page, width, height);
+
+                  function dummy() {
+                    var __la__ = Module._PDFiumJS_GetLayoutAnalsisResults(page);
+                    la = new Uint32Array(HEAPU8.buffer, __la__, 9);
+                    var count = la[0];
+                    var ll = new Float64Array(HEAPU8.buffer, la[1], count);
+                    var lt = new Float64Array(HEAPU8.buffer, la[2], count);
+                    var lr = new Float64Array(HEAPU8.buffer, la[3], count);
+                    var lb = new Float64Array(HEAPU8.buffer, la[4], count);
+                    var lc = new Uint32Array(HEAPU8.buffer, la[5], count);
+                    var la = new Float64Array(HEAPU8.buffer, la[6], count);
+                    var lf = new Uint32Array(HEAPU8.buffer, la[7], count);
+                    var ls = new Float64Array(HEAPU8.buffer, la[8], count);
+                    console.log('COUNT: ', count);
+                    for(var i = 0; i < count; ++i) {
+                      // console.log('index:', i);
+                      // console.log('code:', String.fromCodePoint(lc[i]));
+                      console.log('bounds:', ll[i], lt[i], lr[i], lb[i]);
+                      // if(/\s/.test(String.fromCodePoint(lc[i])))
+                      //   continue;
+                      if(Math.abs(la[i]) > 1e-4)
+                        continue;
+                      var ce = document.createElement('div');
+                      ce.style.position = 'absolute';
+                      ce.style.left = ll[i] + 'px';
+                      ce.style.top = lt[i] + 'px';
+                      ce.style.width = (lr[i] - ll[i]) + 'px';
+                      ce.style.height = (lb[i] - lt[i]) + 'px';
+                      ce.style.background = 'rgba(0, 0, 0, 0.5)';
+                      ce.style.fontSize = '6px';
+                      container.appendChild(ce);
+                      // ce.textContent = la[i] + '';
+                    }
+                    Module._PDFiumJS_LayoutAnalsisResults_destroy(__la__);
+                  }
+                  dummy();
+
                   PDFiumJS.C.Page_destroy(page);
 
                   var buf = PDFiumJS.C.Bitmap_get_buffer(bitmap);

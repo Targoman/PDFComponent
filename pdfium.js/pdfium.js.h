@@ -1,3 +1,6 @@
+#ifndef __PDFIUMJS_PDFIUMJS_H
+#define __PDFIUMJS_PDFIUMJS_H
+
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,3 +44,5 @@ struct PDFiumJS_Page {
 };
 
 extern __GLOBAL__ global;
+
+#endif

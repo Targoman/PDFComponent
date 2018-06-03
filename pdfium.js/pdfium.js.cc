@@ -56,7 +56,6 @@ PDFiumJS_Doc::PDFiumJS_Doc(void *file_id, size_t len) {
     */
 
     page_count = FPDF_GetPageCount(doc);
-    printf("%d\n", page_count);
     for (int i = 0; i < page_count; ++i) {
         (void) FPDFAvail_IsPageAvail(pdf_avail, i, &hints);
     }

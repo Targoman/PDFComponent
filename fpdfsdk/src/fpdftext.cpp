@@ -57,6 +57,7 @@ DLLEXPORT unsigned int STDCALL FPDFText_GetUnicode(FPDF_TEXTPAGE text_page, int 
 	textpage->GetCharInfo(index,charinfo);
 	return charinfo.m_Unicode;
 }
+
 DLLEXPORT double STDCALL FPDFText_GetFontSize(FPDF_TEXTPAGE text_page, int index)
 {
 	if (!text_page) return 0;
@@ -67,6 +68,23 @@ DLLEXPORT double STDCALL FPDFText_GetFontSize(FPDF_TEXTPAGE text_page, int index
 	FPDF_CHAR_INFO	charinfo;
 	textpage->GetCharInfo(index,charinfo);
 	return charinfo.m_FontSize;
+}
+
+DLLEXPORT bool STDCALL FPDFText_GetInfo(FPDF_TEXTPAGE text_page, int index, void** font, double* font_size, double* rotation)
+{
+	if (!text_page) return false;
+	IPDF_TextPage* textpage=(IPDF_TextPage*)text_page;
+
+	if (index<0 || index>=textpage->CountChars()) return false;
+
+	FPDF_CHAR_INFO	charinfo;
+	textpage->GetCharInfo(index,charinfo);
+
+	*font = (void*)charinfo.m_pTextObj->GetFont();
+	*font_size = charinfo.m_FontSize;
+	*rotation = atan2(charinfo.m_Matrix.b, charinfo.m_Matrix.a);
+
+	return true;
 }
 
 DLLEXPORT void STDCALL FPDFText_GetCharBox(FPDF_TEXTPAGE text_page, int index,double* left,
