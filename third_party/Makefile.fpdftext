@@ -261,6 +261,7 @@ staticlib: ../out/lib/$(TARGET)
 	@test -d ../out/lib/ || mkdir -p ../out/lib/
 	-$(DEL_FILE) ../out/lib/$(TARGET)
 	$(AR) $(DESTDIR)$(TARGET) $(OBJECTS)
+	mkdir -p /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/ && cp pdfiumjs/core/include/fpdftext/fpdf_text.h pdfiumjs/core/src/fpdftext/text_int.h pdfiumjs/core/src/fpdftext/txtproc.h /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/
 
 
 ../out/lib/libfpdftext.prl: 

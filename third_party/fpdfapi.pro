@@ -117,3 +117,4 @@ HEADERS += \
 ProjectName=fpdfapi
 include(./common.pri)
 
+message($$DESTDIR)

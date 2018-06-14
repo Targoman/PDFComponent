@@ -545,6 +545,7 @@ staticlib: ../out/lib/$(TARGET)
 	@test -d ../out/lib/ || mkdir -p ../out/lib/
 	-$(DEL_FILE) ../out/lib/$(TARGET)
 	$(AR) $(DESTDIR)$(TARGET) $(OBJECTS)
+	mkdir -p /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/ && cp pdfiumjs/core/include/fpdfapi/fpdfapi.h pdfiumjs/core/include/fpdfapi/fpdf_module.h pdfiumjs/core/include/fpdfapi/fpdf_objects.h pdfiumjs/core/include/fpdfapi/fpdf_page.h pdfiumjs/core/include/fpdfapi/fpdf_pageobj.h pdfiumjs/core/include/fpdfapi/fpdf_parser.h pdfiumjs/core/include/fpdfapi/fpdf_render.h pdfiumjs/core/include/fpdfapi/fpdf_resource.h pdfiumjs/core/include/fpdfapi/fpdf_serial.h pdfiumjs/core/src/fpdfapi/fpdf_cmaps/cmap_int.h pdfiumjs/core/src/fpdfapi/fpdf_edit/editint.h pdfiumjs/core/src/fpdfapi/fpdf_font/common.h pdfiumjs/core/src/fpdfapi/fpdf_font/font_int.h pdfiumjs/core/src/fpdfapi/fpdf_font/ttgsubtable.h pdfiumjs/core/src/fpdfapi/fpdf_page/pageint.h pdfiumjs/core/src/fpdfapi/fpdf_parser/filters_int.h pdfiumjs/core/src/fpdfapi/fpdf_render/render_int.h /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/
 
 
 ../out/lib/libfpdfapi.prl: 

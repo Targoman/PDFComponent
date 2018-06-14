@@ -47,20 +47,48 @@ OBJECTS_DIR   = ../out/obj/
 
 ####### Files
 
-SOURCES       = pdfiumjs/core/include/fxcrt/fx_ext.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_platforms.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_posix.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_windows.h \
-		pdfiumjs/core/src/fxcrt/fx_arabic.h \
-		pdfiumjs/core/src/fxcrt/plex.h \
-		pdfiumjs/core/src/fxcrt/xml_int.h 
-OBJECTS       = ../out/obj/fx_ext.o \
-		../out/obj/fxcrt_platforms.o \
+SOURCES       = pdfiumjs/core/src/fxcrt/fxcrt_platforms.cpp \
+		pdfiumjs/core/src/fxcrt/fxcrt_posix.cpp \
+		pdfiumjs/core/src/fxcrt/fxcrt_windows.cpp \
+		pdfiumjs/core/src/fxcrt/fx_arabic.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_array.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_bstring.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_buffer.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_coords.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_gcc.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_list.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_maps.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_memmgr.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_plex.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_utf.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_util.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_wstring.cpp \
+		pdfiumjs/core/src/fxcrt/fx_extension.cpp \
+		pdfiumjs/core/src/fxcrt/fx_ucddata.cpp \
+		pdfiumjs/core/src/fxcrt/fx_unicode.cpp \
+		pdfiumjs/core/src/fxcrt/fx_xml_composer.cpp \
+		pdfiumjs/core/src/fxcrt/fx_xml_parser.cpp 
+OBJECTS       = ../out/obj/fxcrt_platforms.o \
 		../out/obj/fxcrt_posix.o \
 		../out/obj/fxcrt_windows.o \
 		../out/obj/fx_arabic.o \
-		../out/obj/plex.o \
-		../out/obj/xml_int.o
+		../out/obj/fx_basic_array.o \
+		../out/obj/fx_basic_bstring.o \
+		../out/obj/fx_basic_buffer.o \
+		../out/obj/fx_basic_coords.o \
+		../out/obj/fx_basic_gcc.o \
+		../out/obj/fx_basic_list.o \
+		../out/obj/fx_basic_maps.o \
+		../out/obj/fx_basic_memmgr.o \
+		../out/obj/fx_basic_plex.o \
+		../out/obj/fx_basic_utf.o \
+		../out/obj/fx_basic_util.o \
+		../out/obj/fx_basic_wstring.o \
+		../out/obj/fx_extension.o \
+		../out/obj/fx_ucddata.o \
+		../out/obj/fx_unicode.o \
+		../out/obj/fx_xml_composer.o \
+		../out/obj/fx_xml_parser.o
 DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/common/linux.conf \
@@ -260,13 +288,27 @@ DIST          = /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		pdfiumjs/core/src/fxcrt/fxcrt_windows.h \
 		pdfiumjs/core/src/fxcrt/fx_arabic.h \
 		pdfiumjs/core/src/fxcrt/plex.h \
-		pdfiumjs/core/src/fxcrt/xml_int.h pdfiumjs/core/include/fxcrt/fx_ext.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_platforms.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_posix.h \
-		pdfiumjs/core/src/fxcrt/fxcrt_windows.h \
-		pdfiumjs/core/src/fxcrt/fx_arabic.h \
-		pdfiumjs/core/src/fxcrt/plex.h \
-		pdfiumjs/core/src/fxcrt/xml_int.h
+		pdfiumjs/core/src/fxcrt/xml_int.h pdfiumjs/core/src/fxcrt/fxcrt_platforms.cpp \
+		pdfiumjs/core/src/fxcrt/fxcrt_posix.cpp \
+		pdfiumjs/core/src/fxcrt/fxcrt_windows.cpp \
+		pdfiumjs/core/src/fxcrt/fx_arabic.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_array.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_bstring.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_buffer.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_coords.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_gcc.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_list.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_maps.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_memmgr.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_plex.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_utf.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_util.cpp \
+		pdfiumjs/core/src/fxcrt/fx_basic_wstring.cpp \
+		pdfiumjs/core/src/fxcrt/fx_extension.cpp \
+		pdfiumjs/core/src/fxcrt/fx_ucddata.cpp \
+		pdfiumjs/core/src/fxcrt/fx_unicode.cpp \
+		pdfiumjs/core/src/fxcrt/fx_xml_composer.cpp \
+		pdfiumjs/core/src/fxcrt/fx_xml_parser.cpp
 QMAKE_TARGET  = fxcrt
 DESTDIR       = ../out/lib/
 TARGET        = libfxcrt.a
@@ -281,6 +323,7 @@ staticlib: ../out/lib/$(TARGET)
 	@test -d ../out/lib/ || mkdir -p ../out/lib/
 	-$(DEL_FILE) ../out/lib/$(TARGET)
 	$(AR) $(DESTDIR)$(TARGET) $(OBJECTS)
+	mkdir -p /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/ && cp pdfiumjs/core/include/fxcrt/fx_arb.h pdfiumjs/core/include/fxcrt/fx_basic.h pdfiumjs/core/include/fxcrt/fx_coordinates.h pdfiumjs/core/include/fxcrt/fx_ext.h pdfiumjs/core/include/fxcrt/fx_memory.h pdfiumjs/core/include/fxcrt/fx_stream.h pdfiumjs/core/include/fxcrt/fx_string.h pdfiumjs/core/include/fxcrt/fx_system.h pdfiumjs/core/include/fxcrt/fx_ucd.h pdfiumjs/core/include/fxcrt/fx_xml.h pdfiumjs/core/src/fxcrt/extension.h pdfiumjs/core/src/fxcrt/fxcrt_platforms.h pdfiumjs/core/src/fxcrt/fxcrt_posix.h pdfiumjs/core/src/fxcrt/fxcrt_windows.h pdfiumjs/core/src/fxcrt/fx_arabic.h pdfiumjs/core/src/fxcrt/plex.h pdfiumjs/core/src/fxcrt/xml_int.h /home/behrooz/Projects/PDFComponent/out/include/pdfiumjs/
 
 
 ../out/lib/libfxcrt.prl: 
@@ -675,7 +718,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.10.0/5.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents pdfiumjs/core/include/fxcrt/fx_arb.h pdfiumjs/core/include/fxcrt/fx_basic.h pdfiumjs/core/include/fxcrt/fx_coordinates.h pdfiumjs/core/include/fxcrt/fx_ext.h pdfiumjs/core/include/fxcrt/fx_memory.h pdfiumjs/core/include/fxcrt/fx_stream.h pdfiumjs/core/include/fxcrt/fx_string.h pdfiumjs/core/include/fxcrt/fx_system.h pdfiumjs/core/include/fxcrt/fx_ucd.h pdfiumjs/core/include/fxcrt/fx_xml.h pdfiumjs/core/src/fxcrt/extension.h pdfiumjs/core/src/fxcrt/fxcrt_platforms.h pdfiumjs/core/src/fxcrt/fxcrt_posix.h pdfiumjs/core/src/fxcrt/fxcrt_windows.h pdfiumjs/core/src/fxcrt/fx_arabic.h pdfiumjs/core/src/fxcrt/plex.h pdfiumjs/core/src/fxcrt/xml_int.h $(DISTDIR)/
-	$(COPY_FILE) --parents pdfiumjs/core/include/fxcrt/fx_ext.h pdfiumjs/core/src/fxcrt/fxcrt_platforms.h pdfiumjs/core/src/fxcrt/fxcrt_posix.h pdfiumjs/core/src/fxcrt/fxcrt_windows.h pdfiumjs/core/src/fxcrt/fx_arabic.h pdfiumjs/core/src/fxcrt/plex.h pdfiumjs/core/src/fxcrt/xml_int.h $(DISTDIR)/
+	$(COPY_FILE) --parents pdfiumjs/core/src/fxcrt/fxcrt_platforms.cpp pdfiumjs/core/src/fxcrt/fxcrt_posix.cpp pdfiumjs/core/src/fxcrt/fxcrt_windows.cpp pdfiumjs/core/src/fxcrt/fx_arabic.cpp pdfiumjs/core/src/fxcrt/fx_basic_array.cpp pdfiumjs/core/src/fxcrt/fx_basic_bstring.cpp pdfiumjs/core/src/fxcrt/fx_basic_buffer.cpp pdfiumjs/core/src/fxcrt/fx_basic_coords.cpp pdfiumjs/core/src/fxcrt/fx_basic_gcc.cpp pdfiumjs/core/src/fxcrt/fx_basic_list.cpp pdfiumjs/core/src/fxcrt/fx_basic_maps.cpp pdfiumjs/core/src/fxcrt/fx_basic_memmgr.cpp pdfiumjs/core/src/fxcrt/fx_basic_plex.cpp pdfiumjs/core/src/fxcrt/fx_basic_utf.cpp pdfiumjs/core/src/fxcrt/fx_basic_util.cpp pdfiumjs/core/src/fxcrt/fx_basic_wstring.cpp pdfiumjs/core/src/fxcrt/fx_extension.cpp pdfiumjs/core/src/fxcrt/fx_ucddata.cpp pdfiumjs/core/src/fxcrt/fx_unicode.cpp pdfiumjs/core/src/fxcrt/fx_xml_composer.cpp pdfiumjs/core/src/fxcrt/fx_xml_parser.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -723,7 +766,98 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-../out/obj/fx_ext.o: pdfiumjs/core/include/fxcrt/fx_ext.h pdfiumjs/core/include/fxcrt/fx_basic.h \
+../out/obj/fxcrt_platforms.o: pdfiumjs/core/src/fxcrt/fxcrt_platforms.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/fxcrt_platforms.h \
+		pdfiumjs/core/src/fxcrt/extension.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fxcrt_platforms.o pdfiumjs/core/src/fxcrt/fxcrt_platforms.cpp
+
+../out/obj/fxcrt_posix.o: pdfiumjs/core/src/fxcrt/fxcrt_posix.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/fxcrt_posix.h \
+		pdfiumjs/core/src/fxcrt/extension.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fxcrt_posix.o pdfiumjs/core/src/fxcrt/fxcrt_posix.cpp
+
+../out/obj/fxcrt_windows.o: pdfiumjs/core/src/fxcrt/fxcrt_windows.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/fxcrt_windows.h \
+		pdfiumjs/core/src/fxcrt/extension.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fxcrt_windows.o pdfiumjs/core/src/fxcrt/fxcrt_windows.cpp
+
+../out/obj/fx_arabic.o: pdfiumjs/core/src/fxcrt/fx_arabic.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/fx_arabic.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_arabic.o pdfiumjs/core/src/fxcrt/fx_arabic.cpp
+
+../out/obj/fx_basic_array.o: pdfiumjs/core/src/fxcrt/fx_basic_array.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/third_party/numerics/safe_math.h \
+		pdfiumjs/third_party/numerics/safe_math_impl.h \
+		pdfiumjs/third_party/macros.h \
+		pdfiumjs/third_party/template_util.h \
+		pdfiumjs/third_party/numerics/safe_conversions.h \
+		pdfiumjs/third_party/logging.h \
+		pdfiumjs/third_party/numerics/safe_conversions_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_array.o pdfiumjs/core/src/fxcrt/fx_basic_array.cpp
+
+../out/obj/fx_basic_bstring.o: pdfiumjs/core/src/fxcrt/fx_basic_bstring.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/third_party/numerics/safe_math.h \
+		pdfiumjs/third_party/numerics/safe_math_impl.h \
+		pdfiumjs/third_party/macros.h \
+		pdfiumjs/third_party/template_util.h \
+		pdfiumjs/third_party/numerics/safe_conversions.h \
+		pdfiumjs/third_party/logging.h \
+		pdfiumjs/third_party/numerics/safe_conversions_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_bstring.o pdfiumjs/core/src/fxcrt/fx_basic_bstring.cpp
+
+../out/obj/fx_basic_buffer.o: pdfiumjs/core/src/fxcrt/fx_basic_buffer.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_buffer.o pdfiumjs/core/src/fxcrt/fx_basic_buffer.cpp
+
+../out/obj/fx_basic_coords.o: pdfiumjs/core/src/fxcrt/fx_basic_coords.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
 		pdfiumjs/core/include/fxcrt/fx_system.h \
 		pdfiumjs/core/include/fxcrt/fx_memory.h \
 		pdfiumjs/core/include/fxcrt/fx_string.h \
@@ -732,25 +866,138 @@ compiler_clean: compiler_moc_predefs_clean
 		pdfiumjs/core/include/fxcrt/fx_xml.h \
 		pdfiumjs/core/include/fxcrt/fx_ucd.h \
 		pdfiumjs/core/include/fxcrt/fx_arb.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/fx_ext.o pdfiumjs/core/include/fxcrt/fx_ext.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_coords.o pdfiumjs/core/src/fxcrt/fx_basic_coords.cpp
 
-../out/obj/fxcrt_platforms.o: pdfiumjs/core/src/fxcrt/fxcrt_platforms.h pdfiumjs/core/src/fxcrt/extension.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/fxcrt_platforms.o pdfiumjs/core/src/fxcrt/fxcrt_platforms.h
+../out/obj/fx_basic_gcc.o: pdfiumjs/core/src/fxcrt/fx_basic_gcc.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_gcc.o pdfiumjs/core/src/fxcrt/fx_basic_gcc.cpp
 
-../out/obj/fxcrt_posix.o: pdfiumjs/core/src/fxcrt/fxcrt_posix.h pdfiumjs/core/src/fxcrt/extension.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/fxcrt_posix.o pdfiumjs/core/src/fxcrt/fxcrt_posix.h
+../out/obj/fx_basic_list.o: pdfiumjs/core/src/fxcrt/fx_basic_list.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/src/fxcrt/plex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_list.o pdfiumjs/core/src/fxcrt/fx_basic_list.cpp
 
-../out/obj/fxcrt_windows.o: pdfiumjs/core/src/fxcrt/fxcrt_windows.h pdfiumjs/core/src/fxcrt/extension.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/fxcrt_windows.o pdfiumjs/core/src/fxcrt/fxcrt_windows.h
+../out/obj/fx_basic_maps.o: pdfiumjs/core/src/fxcrt/fx_basic_maps.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/plex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_maps.o pdfiumjs/core/src/fxcrt/fx_basic_maps.cpp
 
-../out/obj/fx_arabic.o: pdfiumjs/core/src/fxcrt/fx_arabic.h 
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/fx_arabic.o pdfiumjs/core/src/fxcrt/fx_arabic.h
+../out/obj/fx_basic_memmgr.o: pdfiumjs/core/src/fxcrt/fx_basic_memmgr.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_memmgr.o pdfiumjs/core/src/fxcrt/fx_basic_memmgr.cpp
 
-../out/obj/plex.o: pdfiumjs/core/src/fxcrt/plex.h 
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/plex.o pdfiumjs/core/src/fxcrt/plex.h
+../out/obj/fx_basic_plex.o: pdfiumjs/core/src/fxcrt/fx_basic_plex.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/src/fxcrt/plex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_plex.o pdfiumjs/core/src/fxcrt/fx_basic_plex.cpp
 
-../out/obj/xml_int.o: pdfiumjs/core/src/fxcrt/xml_int.h 
-	$(CC) -c $(CFLAGS) $(INCPATH) -o ../out/obj/xml_int.o pdfiumjs/core/src/fxcrt/xml_int.h
+../out/obj/fx_basic_utf.o: pdfiumjs/core/src/fxcrt/fx_basic_utf.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_utf.o pdfiumjs/core/src/fxcrt/fx_basic_utf.cpp
+
+../out/obj/fx_basic_util.o: pdfiumjs/core/src/fxcrt/fx_basic_util.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_util.o pdfiumjs/core/src/fxcrt/fx_basic_util.cpp
+
+../out/obj/fx_basic_wstring.o: pdfiumjs/core/src/fxcrt/fx_basic_wstring.cpp pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/third_party/numerics/safe_math.h \
+		pdfiumjs/third_party/numerics/safe_math_impl.h \
+		pdfiumjs/third_party/macros.h \
+		pdfiumjs/third_party/template_util.h \
+		pdfiumjs/third_party/numerics/safe_conversions.h \
+		pdfiumjs/third_party/logging.h \
+		pdfiumjs/third_party/numerics/safe_conversions_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_basic_wstring.o pdfiumjs/core/src/fxcrt/fx_basic_wstring.cpp
+
+../out/obj/fx_extension.o: pdfiumjs/core/src/fxcrt/fx_extension.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h \
+		pdfiumjs/core/src/fxcrt/extension.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_extension.o pdfiumjs/core/src/fxcrt/fx_extension.cpp
+
+../out/obj/fx_ucddata.o: pdfiumjs/core/src/fxcrt/fx_ucddata.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_ucddata.o pdfiumjs/core/src/fxcrt/fx_ucddata.cpp
+
+../out/obj/fx_unicode.o: pdfiumjs/core/src/fxcrt/fx_unicode.cpp pdfiumjs/core/include/fxcrt/fx_ext.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/include/fxcrt/fx_coordinates.h \
+		pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_ucd.h \
+		pdfiumjs/core/include/fxcrt/fx_arb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_unicode.o pdfiumjs/core/src/fxcrt/fx_unicode.cpp
+
+../out/obj/fx_xml_composer.o: pdfiumjs/core/src/fxcrt/fx_xml_composer.cpp pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/src/fxcrt/xml_int.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_xml_composer.o pdfiumjs/core/src/fxcrt/fx_xml_composer.cpp
+
+../out/obj/fx_xml_parser.o: pdfiumjs/core/src/fxcrt/fx_xml_parser.cpp pdfiumjs/core/include/fxcrt/fx_xml.h \
+		pdfiumjs/core/include/fxcrt/fx_basic.h \
+		pdfiumjs/core/include/fxcrt/fx_system.h \
+		pdfiumjs/core/include/fxcrt/fx_memory.h \
+		pdfiumjs/core/include/fxcrt/fx_string.h \
+		pdfiumjs/core/include/fxcrt/fx_stream.h \
+		pdfiumjs/core/src/fxcrt/xml_int.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../out/obj/fx_xml_parser.o pdfiumjs/core/src/fxcrt/fx_xml_parser.cpp
 
 ####### Install
 

@@ -12,7 +12,10 @@
 
 TEMPLATE = subdirs
 
+include(../Project.pri)
+
 SUBDIRS += fpdfapi fpdfdoc fpdftext fxcodec fxcrt fxge
+CONFIG += ordered
 
 fpdfapi.file = ./fpdfapi.pro
 fpdfdoc.file = ./fpdfdoc.pro
