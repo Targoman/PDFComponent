@@ -1,7 +1,6 @@
 SOURCES += \
     libPDFLA/pdfla.cpp
 
-
 TEMPLATE = lib
 TARGET = PDFLA
 
