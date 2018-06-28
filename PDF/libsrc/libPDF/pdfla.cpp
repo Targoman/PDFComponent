@@ -1,4 +1,4 @@
-#include <pdfiumjs/fpdfapi.h>
+#include <pdfium
 
 CPDF_ModuleMgr* dummy() {
     return CPDF_ModuleMgr::Get();
