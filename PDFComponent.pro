@@ -14,5 +14,5 @@ TEMPLATE = subdirs
 
 include(../Project.pri)
 
-SUBDIRS += third_party PDFLA
+SUBDIRS += third_party PDF
 CONFIG += ordered

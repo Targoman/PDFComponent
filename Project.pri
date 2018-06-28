@@ -15,6 +15,8 @@ BaseOutputDir=$$PWD/out
 DESTDIR = $$BaseOutputDir/lib
 OBJECTS_DIR = $$BaseOutputDir/obj
 MOC_DIR = $$BaseOutputDir/moc
+LIB_OUT_DIR = $$BaseOutputDir/lib
 INC_OUT_DIR = $$BaseOutputDir/include
+BIN_OUT_DIR = $$BaseOutputDir/bin
 
 QMAKE_CXXFLAGS += -fPIC
