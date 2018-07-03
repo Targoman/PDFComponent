@@ -1,5 +1,11 @@
-#include <pdfiumjs/fpdfapi.h>
+#include <pdfiumjs/core/include/fpdfapi/fpdfapi.h>
 
-CPDF_ModuleMgr* dummy() {
-    return CPDF_ModuleMgr::Get();
+namespace Targoman {
+namespace PDFComponent {
+namespace LA {
+
+
+
+}
+}
 }
