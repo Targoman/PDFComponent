@@ -1,5 +1,7 @@
 SOURCES += \
-    libPDF/clsPDF.cpp
+    libPDF/clsPDF.cpp \
+    libPDF/LayoutAnalyser.cpp \
+    libPDF/clsParagraph.cpp
 
 TEMPLATE = lib
 TARGET = PDF
@@ -17,4 +19,6 @@ LIBS += -L$$LIB_OUT_DIR -lfdrm -lfpdfapi -lfpdfdoc -lfpdftext -lfxcodec -lfxcrt 
 CONFIG += c++11
 
 HEADERS += \
-    libPDF/clsPDF.h
+    libPDF/clsPDF.h \
+    libPDF/LayoutAnalyser.h \
+    libPDF/clsParagraph.h

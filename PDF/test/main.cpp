@@ -1,6 +1,9 @@
 #include <libPDF/clsPDF.h>
 #include <iostream>
 #include <fstream>
+#include <opencv2/opencv.hpp>
+
+using namespace Targoman::PDF;
 
 int main() {
 //    CPDF_ModuleMgr::Create();
@@ -45,7 +48,9 @@ int main() {
 
 //    std::cout << "Page 1 rendered successfully!" << std::endl;
 
-    std::ifstream pdfFile("/home/behrooz/Downloads/Part 1 Beginnings-Part 2 Designing for the senses.PDF");
+//    std::ifstream pdfFile("/home/behrooz/Downloads/Part 1 Beginnings-Part 2 Designing for the senses.PDF");
+    std::ifstream pdfFile("/home/behrooz/a121.pdf");
+//    std::ifstream pdfFile("/home/behrooz/Khadivi_ACL06-translate.pdf");
     pdfFile.seekg(0, std::ios_base::end);
     int BufferSize = (int)pdfFile.tellg();
     pdfFile.seekg(0, std::ios_base::beg);
@@ -53,11 +58,42 @@ int main() {
     pdfFile.read(Buffer, BufferSize);
     pdfFile.close();
 
-    Targoman::PDF::clsPDF PDF(Buffer, BufferSize);
+    clsPDF PDF(Buffer, BufferSize);
     std::cout << "PDF has " << PDF.getPageCount() << " pages in total." << std::endl;
 
-    auto Page = PDF.getPage(0);
+    int PageIndex = 2;
+    auto Page = PDF.getPage(PageIndex);
     auto PageImage = Page.getRenderedImage();
 
-    std::cout << "PDF Page 0: " << PageImage.getWidth() << " x " << PageImage.getHeight() << " at " << (void*)PageImage.getBuffer() << std::endl;
+    delete[] Buffer;
+
+    cv::Mat OutputImage(PageImage.getHeight(), PageImage.getWidth(), CV_8UC3);
+
+    Buffer = PageImage.getBuffer();
+    for(int y = 0; y < PageImage.getHeight(); ++y)
+        for(int x = 0; x < PageImage.getWidth(); ++x)
+        {
+            cv::Vec3b C;
+            for(int j = 0; j < 3; ++j)
+                C[j] = (uchar)Buffer[3 * (y * PageImage.getWidth() + x) + j];
+            OutputImage.at<cv::Vec3b>(cv::Point(x, y)) = C;
+        }
+
+    auto TextContent = Page.getTextContents();
+
+    cv::imwrite("./without_chars.bmp", OutputImage);
+
+    for(int i = 0; i < TextContent.getParagraphCount(); ++i) {
+        auto& P = TextContent.getParagraph(i);
+        if(P.getType() != enuParagraphType::Header)
+            continue;
+        std::cout << "===============================================================" << std::endl;
+        std::cout << "X: " << P.getX() << ", Y: " << P.getY() << ", W: " << P.getWidth() << ", H: " << P.getHeight() << std::endl;
+        std::cout << "Type: " << P.getType() << std::endl;
+        cv::rectangle(OutputImage, cv::Rect((int)P.getX(), (int)P.getY(), (int)P.getWidth(), (int)P.getHeight()), cv::Scalar(0, 0, 0), 1);
+    }
+
+    cv::imwrite("./with_chars.bmp", OutputImage);
+    std::cout << "PDF Page " << PageIndex << ": " << PageImage.getWidth() << " x " << PageImage.getHeight() << " at " << (void*)PageImage.getBuffer() << std::endl;
+
 }

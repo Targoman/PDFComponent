@@ -2,6 +2,7 @@
 #define TARGOMAN_PDF_CLSPDF_H
 
 #include <QtCore>
+#include "clsParagraph.h"
 
 namespace Targoman {
 namespace PDF {
@@ -15,13 +16,18 @@ class clsPageTextContentPrivate;
 
 class clsPDFPage;
 
+
 class clsPageTextContent {
 private:
     QScopedPointer<Private::clsPageTextContentPrivate> pPrivate;
+
 public:
     clsPageTextContent(clsPageTextContent&& _other);
     clsPageTextContent();
     ~clsPageTextContent();
+
+    int getParagraphCount() const;
+    const clsParagraph& getParagraph(int _index) const;
 
 public:
     friend class clsPDFPage;
