@@ -1,7 +1,9 @@
 #include <libPDF/clsPDF.h>
 #include <iostream>
 #include <fstream>
+#ifndef __EMSCRIPTEN__
 #include <opencv2/opencv.hpp>
+#endif
 
 using namespace Targoman::PDF;
 
@@ -49,7 +51,11 @@ int main() {
 //    std::cout << "Page 1 rendered successfully!" << std::endl;
 
 //    std::ifstream pdfFile("/home/behrooz/Downloads/Part 1 Beginnings-Part 2 Designing for the senses.PDF");
+#ifdef __EMSCRIPTEN__
     std::ifstream pdfFile("/home/behrooz/a121.pdf");
+#else
+    std::ifstream pdfFile("/home/behrooz/a121.pdf");
+#endif
 //    std::ifstream pdfFile("/home/behrooz/Khadivi_ACL06-translate.pdf");
     pdfFile.seekg(0, std::ios_base::end);
     int BufferSize = (int)pdfFile.tellg();
@@ -67,6 +73,7 @@ int main() {
 
     delete[] Buffer;
 
+#ifndef __EMSCRIPTEN__
     cv::Mat OutputImage(PageImage.getHeight(), PageImage.getWidth(), CV_8UC3);
 
     Buffer = PageImage.getBuffer();
@@ -78,10 +85,12 @@ int main() {
                 C[j] = (uchar)Buffer[3 * (y * PageImage.getWidth() + x) + j];
             OutputImage.at<cv::Vec3b>(cv::Point(x, y)) = C;
         }
-
+#endif
     auto TextContent = Page.getTextContents();
 
+#ifndef __EMSCRIPTEN__
     cv::imwrite("./without_chars.bmp", OutputImage);
+#endif
 
     for(int i = 0; i < TextContent.getParagraphCount(); ++i) {
         auto& P = TextContent.getParagraph(i);
@@ -90,10 +99,14 @@ int main() {
         std::cout << "===============================================================" << std::endl;
         std::cout << "X: " << P.getX() << ", Y: " << P.getY() << ", W: " << P.getWidth() << ", H: " << P.getHeight() << std::endl;
         std::cout << "Type: " << P.getType() << std::endl;
+#ifndef __EMSCRIPTEN__
         cv::rectangle(OutputImage, cv::Rect((int)P.getX(), (int)P.getY(), (int)P.getWidth(), (int)P.getHeight()), cv::Scalar(0, 0, 0), 1);
+#endif
     }
 
+#ifndef __EMSCRIPTEN__
     cv::imwrite("./with_chars.bmp", OutputImage);
+#endif
     std::cout << "PDF Page " << PageIndex << ": " << PageImage.getWidth() << " x " << PageImage.getHeight() << " at " << (void*)PageImage.getBuffer() << std::endl;
 
 }

@@ -1,7 +1,7 @@
 #ifndef TARGOMAN_PDF_CLSPDF_H
 #define TARGOMAN_PDF_CLSPDF_H
 
-#include <QtCore>
+#include <memory>
 #include "clsParagraph.h"
 
 namespace Targoman {
@@ -19,7 +19,7 @@ class clsPDFPage;
 
 class clsPageTextContent {
 private:
-    QScopedPointer<Private::clsPageTextContentPrivate> pPrivate;
+    std::shared_ptr<Private::clsPageTextContentPrivate> pPrivate;
 
 public:
     clsPageTextContent(clsPageTextContent&& _other);
@@ -35,7 +35,8 @@ public:
 
 class clsPageImage {
 private:
-    QScopedPointer<Private::clsPageImagePrivate> pPrivate;
+    std::shared_ptr<Private::clsPageImagePrivate> pPrivate;
+
 public:
     clsPageImage(clsPageImage&& _other);
     clsPageImage();
@@ -51,7 +52,7 @@ public:
 
 class clsPDFPage {
 private:
-    QScopedPointer<Private::clsPDFPagePrivate> pPrivate;
+    std::shared_ptr<Private::clsPDFPagePrivate> pPrivate;
 
 public:
     clsPDFPage(clsPDFPage&& _other);
@@ -67,7 +68,7 @@ public:
 
 class clsPDF {
 private:
-    QScopedPointer<Private::clsPDFPrivate> pPrivate;
+    std::shared_ptr<Private::clsPDFPrivate> pPrivate;
 
 public:
     clsPDF(clsPDF&& _other);
@@ -81,5 +82,8 @@ public:
 }
 }
 
+extern "C" {
+
+}
 
 #endif // TARGOMAN_PDF_CLSPDF_H

@@ -66,7 +66,7 @@ clsPDF::clsPDF(clsPDF &&_other)
 clsPDF::clsPDF(const char *_buffer, const int _bufferSize) :
     pPrivate(new Private::clsPDFPrivate)
 {
-    if(Q_UNLIKELY(__pdfiumModulesNotInitialized__)) {
+    if(__builtin_expect(__pdfiumModulesNotInitialized__, false)) {
         initializePdfiumModules();
         __pdfiumModulesNotInitialized__ = false;
     }
@@ -311,4 +311,8 @@ const clsParagraph& clsPageTextContent::getParagraph(int _index) const
 }
 
 }
+}
+
+extern "C" {
+
 }
