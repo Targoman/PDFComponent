@@ -255,7 +255,7 @@ clsPageImage clsPDFPage::getRenderedImage() const
     auto& Page = this->pPrivate->Page;
     int W = Page->GetPageWidth(), H = Page->GetPageHeight();
     auto Bmp = new CFX_DIBitmap;
-    Bmp->Create(W, H, FXDIB_Rgb);
+    Bmp->Create(W, H, FXDIB_Rgb32);
     FX_RECT WholePageRect(0, 0, W, H);
 
     CFX_FxgeDevice Device;
@@ -271,13 +271,13 @@ clsPageImage clsPDFPage::getRenderedImage() const
     Renderer->Start(Context, &Device, NULL, NULL);
 
     clsPageImage PageImage;
-    PageImage.pPrivate->Buffer = new char[3 * W * H];
+    PageImage.pPrivate->Buffer = new char[4 * W * H];
     PageImage.pPrivate->W = W;
     PageImage.pPrivate->H = H;
     for(int i = 0; i < H; ++i) {
         auto ScanLine = Bmp->GetScanline(i);
-        for(int j = 0; j < 3 * W; ++j) {
-            PageImage.pPrivate->Buffer[3 * W * i + j] = (char)ScanLine[j];
+        for(int j = 0; j < 4 * W; ++j) {
+            PageImage.pPrivate->Buffer[4 * W * i + j] = (char)ScanLine[j];
         }
     }
 

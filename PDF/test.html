@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="./interface.js"></script>
+        <script src="../out/jslib/libPDF_raw.js"></script>
+    </head>
+    <body>
+        <div>
+            <input id="F" type="file" >
+        </div>
+        <canvas id="C"></canvas>
+        <script>
+            let N = document.querySelector('#C');
+            TargomanPDF.then(function(PDF) {
+                document.querySelector('#F').addEventListener('change', e => {
+                    if(!e.target.files.length)
+                        return;
+                    var reader = new FileReader();
+                    reader.onload = e => {
+                        let P0 = new PDF.clsPDF(e.target.result);
+                        let P1 = P0.getPage(0);
+                        let C = P1.getRenderedImage();
+                        let T = N.getContext('2d');
+                        N.width = C.width;
+                        N.height = C.height;
+                        T.drawImage(C, 0, 0);
+                    };
+                    reader.readAsArrayBuffer(e.target.files[0]);
+                });
+            });
+        </script>
+    </body>
+</html>

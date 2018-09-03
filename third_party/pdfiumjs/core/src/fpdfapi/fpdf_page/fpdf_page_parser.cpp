@@ -1279,10 +1279,14 @@ CPDF_Object* CPDF_StreamContentParser::FindResourceObj(FX_BSTR type, const CFX_B
     if (m_pResources == NULL) {
         return NULL;
     }
+    bool FindingFont = (type == "Font");
     if (m_pResources == m_pPageResources) {
         CPDF_Dictionary* pList = m_pResources->GetDict(type);
         if (pList == NULL) {
             return NULL;
+        }
+        if(FindingFont) {
+            printf("%s(%d): name=%s", __FILE__, __LINE__, (FX_LPCSTR)name);
         }
         CPDF_Object* pRes = pList->GetElementValue(name);
         return pRes;

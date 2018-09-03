@@ -599,6 +599,7 @@ CPDF_Object* CPDF_Dictionary::GetElementValue(FX_BSTR key) const
 {
     CPDF_Object* p = NULL;
     m_Map.Lookup(key, (void*&)p);
+    printf("%s(%d): p=%p", __FILE__, __LINE__, (void*)p);
     return p ? p->GetDirect() : NULL;
 }
 CFX_ByteString CPDF_Dictionary::GetString(FX_BSTR key) const

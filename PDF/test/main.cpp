@@ -52,10 +52,11 @@ int main() {
 
 //    std::ifstream pdfFile("/home/behrooz/Downloads/Part 1 Beginnings-Part 2 Designing for the senses.PDF");
 #ifdef __EMSCRIPTEN__
-    std::ifstream pdfFile("/home/behrooz/a121.pdf");
+    std::ifstream pdfFile("/home/behrooz/__a121.pdf");
 #else
-    std::ifstream pdfFile("/home/behrooz/a121.pdf");
+    std::ifstream pdfFile("/home/behrooz/__a121.pdf");
 #endif
+
 //    std::ifstream pdfFile("/home/behrooz/Khadivi_ACL06-translate.pdf");
     pdfFile.seekg(0, std::ios_base::end);
     int BufferSize = (int)pdfFile.tellg();
@@ -67,7 +68,7 @@ int main() {
     clsPDF PDF(Buffer, BufferSize);
     std::cout << "PDF has " << PDF.getPageCount() << " pages in total." << std::endl;
 
-    int PageIndex = 2;
+    int PageIndex = 0;
     auto Page = PDF.getPage(PageIndex);
     auto PageImage = Page.getRenderedImage();
 
@@ -82,9 +83,16 @@ int main() {
         {
             cv::Vec3b C;
             for(int j = 0; j < 3; ++j)
-                C[j] = (uchar)Buffer[3 * (y * PageImage.getWidth() + x) + j];
+                C[j] = (uchar)Buffer[4 * (y * PageImage.getWidth() + x) + j];
             OutputImage.at<cv::Vec3b>(cv::Point(x, y)) = C;
         }
+#else
+    std::ofstream raw_buffer("./without_chars.unk");
+    auto W = PageImage.getWidth();
+    auto H = PageImage.getHeight();
+    raw_buffer.write((const char*)&W, sizeof(W));
+    raw_buffer.write((const char*)&H, sizeof(H));
+    raw_buffer.write((const char*)PageImage.getBuffer(), 4 * W * H);
 #endif
     auto TextContent = Page.getTextContents();
 

@@ -29,7 +29,17 @@ EXPORTED_FUNCTIONS=(
 EXPORTED_FUNCTIONS=$(printf ",'%s'" ${EXPORTED_FUNCTIONS[*]})
 EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS:1}
 
-mkdir -p ../out/jslib/
+OPTIM_FLAGS=(
+    "-O0"
+    # "-Oz"
+    # "--llvm-lto 3"
+    "-s DEMANGLE_SUPPORT=1"
+    "-s FORCE_FILESYSTEM=1"
+    # "-s ELIMINATE_DUPLICATE_FUNCTIONS=1"
+    # "-s MODULARIZE=1"
+    # "--closure 1"
+)
 
-em++ -Oz --llvm-lto 3 libsrc/js_interface.cpp --std=c++11 -o ../out/jslib/libPDF.js -I../out/include  -L../out/lib -lPDF -lfpdfapi -lfpdfdoc -lfpdftext -lfxcodec -lfxcrt -lfdrm -lfxge -s EXPORTED_FUNCTIONS="[$EXPORTED_FUNCTIONS]" --memory-init-file 0
-                                                                                                     
+mkdir -p ../out/jslib/
+em++ ${OPTIM_FLAGS[@]} libsrc/js_interface.cpp --std=c++11 -o ../out/jslib/libPDF_raw.js -I../out/include  -L../out/lib -lPDF -lfpdfapi -lfpdfdoc -lfpdftext -lfxcodec -lfxcrt -lfdrm -lfxge -s EXPORTED_FUNCTIONS="[$EXPORTED_FUNCTIONS]" --memory-init-file 0
+cat ../out/jslib/libPDF_raw.js ./interface.js > ../out/jslib/libPDF.js
