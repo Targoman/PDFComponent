@@ -30,14 +30,14 @@ EXPORTED_FUNCTIONS=$(printf ",'%s'" ${EXPORTED_FUNCTIONS[*]})
 EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS:1}
 
 OPTIM_FLAGS=(
-    "-O0"
-    # "-Oz"
-    # "--llvm-lto 3"
+    #"-O0"
+    "-Oz"
+    "--llvm-lto 3"
     "-s DEMANGLE_SUPPORT=1"
     "-s FORCE_FILESYSTEM=1"
-    # "-s ELIMINATE_DUPLICATE_FUNCTIONS=1"
+    "-s ELIMINATE_DUPLICATE_FUNCTIONS=1"
     # "-s MODULARIZE=1"
-    # "--closure 1"
+    "--closure 1"
 )
 
 mkdir -p ../out/jslib/
