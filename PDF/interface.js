@@ -1,3 +1,4 @@
+let Module;
 let TargomanPDF = (function libPDFjs_initialize() {
     let f, result = new Promise((_f, _g) => { f = _f; });
     function __initialize__() {
@@ -88,7 +89,7 @@ let TargomanPDF = (function libPDFjs_initialize() {
 
         f({ clsPDF, clsPDFPage, clsPageTextContent });
     };
-    window.Module = {
+    Module = {
         noExitRuntime: true,
         print: function() { 
             console.group.apply(console, arguments); 
@@ -98,7 +99,8 @@ let TargomanPDF = (function libPDFjs_initialize() {
             console.group.apply(console, arguments); 
             console.groupEnd();
         },
-        onRuntimeInitialized: __initialize__
+        onRuntimeInitialized: __initialize__,
+        ENVIRONMENT: 'WEB'
     };
     return result;
 })()

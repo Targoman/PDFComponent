@@ -33,10 +33,11 @@ OPTIM_FLAGS=(
     #"-O0"
     "-Oz"
     "--llvm-lto 3"
+    "-s TOTAL_MEMORY=67108864"
     "-s DEMANGLE_SUPPORT=1"
     "-s FORCE_FILESYSTEM=1"
     "-s ELIMINATE_DUPLICATE_FUNCTIONS=1"
-    # "-s MODULARIZE=1"
+    #"-s MODULARIZE=1"
     "--closure 1"
 )
 
